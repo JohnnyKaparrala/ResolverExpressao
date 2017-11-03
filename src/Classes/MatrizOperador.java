@@ -46,12 +46,25 @@ public class MatrizOperador {
 		
 		return ret.toString();
 	}
-	/*
+	
 	public int hashCode() {
+		int ret = 666;
 		
+		ret = ret * 7 + new Integer( lista.hashCode() );
+		
+		return ret;
 	}
 	
-	public boolean equals() {
+	public boolean equals(Object obj) {
+		if ( this == obj)
+            return true;
 		
-	}*/
+		if ( obj == null)
+			return false;
+
+	    if (!(obj instanceof MatrizOperador))
+	            return false;
+	    //se eh instancia de MatrizOperador, eh igual
+	    return true;
+	}
 }
