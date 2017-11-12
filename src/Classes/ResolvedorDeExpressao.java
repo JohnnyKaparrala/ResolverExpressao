@@ -38,31 +38,46 @@ public class ResolvedorDeExpressao {
 		 }
 	}
 	
-	protected void resolverNotacaoPolonesa() throws Exception{
-        char op;
-        double num1;
-        double num2;    
+    protected void resolverNotacaoPolonesa() throws Exception{
+         
+            char op;   
+            double num1;
+            double num2;
 
-        while() {
-            if()
+            do
             {
-                this.pilhaTmp.empilhe(this.filaTmp.getElemento());
-                this.filaTmp.desenfileire();
+                if(ehNumero(this.filaTmp.getElemento()))
+                {
+                    this.pilhaTmp.empilhe(this.filaTmp.getElemento());
+                    this.filaTmp.desenfileire();
+                }
+                else
+                {
+                    op = (char)this.filaTmp.getElemento();
+                    this.filaTmp.desenfileire();
+                    num1 = (double)this.pilhaTmp.getElement();
+                    this.pilhaTmp.desempilhe();
+                    num2 = (double)this.pilhaTmp.getElement();
+                    this.pilhaTmp.desempilhe();
+
+                    this.pilhaTmp.empilhe(fazOperacao(num1,num2,op));
+                }
             }
-            else
-            {
-                op = (char)this.filaTmp.getElemento();
-                this.filaTmp.desenfileire();
-                num1 = (Integer)this.pilhaTmp.getElement();
-                this.pilhaTmp.desempilhe();
-                num2 = (Integer)this.pilhaTmp.getElement();
-                this.pilhaTmp.desempilhe();
-                    
-                this.pilhaTmp.empilhe(fazOperacao(num1,num2,op));
-                           
-            }
+            while(!(this.filaTmp.vazia())) ;
+            
         }
-	}
+          
+       protected boolean ehNumero(String s){
+           
+           try{
+                double teste = Double.parseDouble(s);
+                return true;
+           }
+           catch(Exception erro)
+           {   
+           }
+            return false;
+        }
 	protected double fazOperacao(double num1,double num2,  char op) throws Exception
        {
            double ret = 0;//ele ira ser inicializado de qualqer jeito mas nao sabe disso
