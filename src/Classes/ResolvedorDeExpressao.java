@@ -8,16 +8,16 @@ import java.util.StringTokenizer;
  */
 public class ResolvedorDeExpressao {
 	protected MatrizOperador matriz = new MatrizOperador();
-	protected Pilha pilhaTmp;
-	protected Fila filaTmp;
+	protected Pilha<String> pilhaTmp;
+	protected Fila<String>  filaExpPolonesa;
 	protected StringTokenizer quebrador;
 	protected String exp;
-        protected static final String operadores = "^*/+-";
 
-        
-	
 	public ResolvedorDeExpressao(String expOriginal) throws Exception{
 		this.exp = expOriginal;
+		quebrador = new StringTokenizer(this.exp, MatrizOperador.lista, true);
+		pilhaTmp = new Pilha<String>();
+		filaExpPolonesa = new Fila<String>();
 	}
 	
 	public void resolver() throws Exception {
@@ -26,21 +26,25 @@ public class ResolvedorDeExpressao {
 	}
 	
 	protected void paraNotacaoPolonesa() throws Exception{
-		quebrador = new StringTokenizer(this.exp, this.matriz.lista, true);
-		
+		 while( quebrador.hasMoreTokens()) {
+			 String str = quebrador.nextToken();
+			 
+			 if( this.matriz.lista.contains(str)) {
+				 filaExpPolonesa.enfileire(str);
+			 }else{
+				 pilhaTmp.empilhe(str);
+			 }
+			
+		 }
 	}
 	
 	protected void resolverNotacaoPolonesa() throws Exception{
-            char op;
-            double num1;
-            double num2;    
+        char op;
+        double num1;
+        double num2;    
 
-            
-
-                       
-    
-            
-            //if()
+        while() {
+            if()
             {
                 this.pilhaTmp.empilhe(this.filaTmp.getElemento());
                 this.filaTmp.desenfileire();
@@ -57,11 +61,9 @@ public class ResolvedorDeExpressao {
                 this.pilhaTmp.empilhe(fazOperacao(num1,num2,op));
                            
             }
-            
-          
-                
+        }
 	}
-	protected double fazOperacao(double num1,double num2,  char op)
+	protected double fazOperacao(double num1,double num2,  char op) throws Exception
        {
            double ret = 0;//ele ira ser inicializado de qualqer jeito mas nao sabe disso
            switch(op){
@@ -75,7 +77,8 @@ public class ResolvedorDeExpressao {
                 case'*': ret =num1 * num2;
                         break;        
                 case'^': ret = Math.pow(num1, num2);
-                        break;                                
+                        break;     
+                default: throw new Exception("Operador invalido.");
            }
            return ret;      
        }
@@ -92,7 +95,6 @@ public class ResolvedorDeExpressao {
             ret =  ret*7 + this.exp.hashCode();
             
             return ret;
-            
             
 	}
 	

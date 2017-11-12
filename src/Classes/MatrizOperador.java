@@ -1,16 +1,17 @@
 package Classes;
 
 public class MatrizOperador {
-	protected static final String lista = "(^*/+-)";
+	public static final String lista = "(^*/+-)";
 	
 	protected static final boolean[][] matriz = { 
-			{false,false,false,false,false,false,true},
-			{false,false,true ,true ,true ,true ,true},
-			{false,false,true ,true ,true ,true ,true},
-			{false,false,true ,true ,true ,true ,true},
-			{false,false,false,false,true ,true ,true},
-			{false,false,false,false,true ,true ,true},
-			{false,false,false,false,false,false,false},
+			//(      ^     *     /     +     -     )	
+			{false,false,false,false,false,false,true },// )
+			{false,false,true ,true ,true ,true ,true },// ^
+			{false,false,true ,true ,true ,true ,true },// *
+			{false,false,true ,true ,true ,true ,true },// /
+			{false,false,false,false,true ,true ,true },// +
+			{false,false,false,false,true ,true ,true },// -
+			{false,false,false,false,false,false,false},// )
 			};
 	
 	public MatrizOperador() {
