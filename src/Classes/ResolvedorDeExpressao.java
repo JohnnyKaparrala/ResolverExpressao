@@ -12,6 +12,8 @@ public class ResolvedorDeExpressao {
 	protected Fila filaTmp;
 	protected StringTokenizer quebrador;
 	protected String exp;
+
+        
 	
 	public ResolvedorDeExpressao(String expOriginal) throws Exception{
 		this.exp = expOriginal;
@@ -28,11 +30,67 @@ public class ResolvedorDeExpressao {
 	}
 	
 	protected void resolverNotacaoPolonesa() throws Exception{
-		
+            char op;
+            double num1;
+            double num2;    
+
+            
+
+                       
+    
+            
+            if( this.operadores.contains(filaTmp.getElemento()))
+            {
+                this.pilhaTmp.empilhe(this.filaTmp.getElemento());
+                this.filaTmp.desenfileire();
+            }
+            else
+            {
+                num1 = (Integer)this.pilhaTmp.getElement();
+                this.pilhaTmp.desempilhe();
+                num2 = (Integer)this.pilhaTmp.getElement();
+                this.pilhaTmp.desempilhe();
+                    
+                this.pilhaTmp.empilhe(fazOperacao(num1,num2,op));
+                           
+            }
+            
+          
+                
 	}
-	
+	protected double fazOperacao(double num1,double num2,  char op)
+       {
+           double ret = 0;//ele ira ser inicializado de qualqer jeito mas nao sabe disso
+           switch(op){
+               
+                case'+': ret =num1 + num2;
+                        break;
+                case'-': ret =num1 - num2;
+                        break;
+                case'/': ret =num1 / num2;
+                        break;        
+                case'*': ret =num1 * num2;
+                        break;        
+                case'^': ret = Math.pow(num1, num2);
+                        break;                                
+           }
+           return ret;      
+       }
+       
+       
 	public int hashCode() {
-		
+            
+            int ret = 666;
+            
+            ret =  ret*7 + this.matriz.hashCode();
+            ret =  ret*7 + this.pilhaTmp.hashCode();
+            ret =  ret*7 + this.filaTmp.hashCode();
+            ret =  ret*7 + this.quebrador.hashCode();        
+            ret =  ret*7 + this.exp.hashCode();
+            
+            return ret;
+            
+            
 	}
 	
 	public String toString() {
@@ -40,6 +98,28 @@ public class ResolvedorDeExpressao {
 	}
 	
 	public boolean equals(Object obj) {
+            
+            if(this==obj)
+                return true;
+            if(obj==null)
+                return false;
+            if(!(obj instanceof ResolvedorDeExpressao))
+                return false;
+            
+            ResolvedorDeExpressao resolvE = (ResolvedorDeExpressao)obj;
+            
+            if(!(this.matriz.equals(resolvE.matriz)))
+                return false;
+            if(!(this.pilhaTmp.equals(resolvE.pilhaTmp)))
+                return false;
+            if(!(this.filaTmp.equals(resolvE.filaTmp)))
+                return false;
+            if(!(this.quebrador.equals(resolvE.quebrador)))
+                return false;
+            if(!(this.exp.equals(resolvE.exp)))
+                return false; 
+            
+            return true;
 		
 	}
 	
