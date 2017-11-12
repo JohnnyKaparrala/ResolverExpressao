@@ -12,6 +12,7 @@ public class ResolvedorDeExpressao {
 	protected Fila filaTmp;
 	protected StringTokenizer quebrador;
 	protected String exp;
+        protected static final String operadores = "^*/+-";
 
         
 	
@@ -39,13 +40,15 @@ public class ResolvedorDeExpressao {
                        
     
             
-            if( this.operadores.contains(filaTmp.getElemento()))
+            //if()
             {
                 this.pilhaTmp.empilhe(this.filaTmp.getElemento());
                 this.filaTmp.desenfileire();
             }
             else
             {
+                op = (char)this.filaTmp.getElemento();
+                this.filaTmp.desenfileire();
                 num1 = (Integer)this.pilhaTmp.getElement();
                 this.pilhaTmp.desempilhe();
                 num2 = (Integer)this.pilhaTmp.getElement();
