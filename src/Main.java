@@ -13,7 +13,7 @@ public class Main {
 	        ResolvedorDeExpressao resolvedor = new ResolvedorDeExpressao(exp);
 	        
 	        resolvedor.resolver();
-	        System.out.println(resolvedor.toString());
+	        System.out.println("\n" + resolvedor.toString());
 		}
 		catch(Exception erro) {
 			erro.printStackTrace();

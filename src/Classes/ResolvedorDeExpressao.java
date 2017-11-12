@@ -43,28 +43,28 @@ public class ResolvedorDeExpressao {
             char op;   
             double num1;
             double num2;
+            pilhaTmp = new <String>Pilha();
 
             do
             {
-                if(ehNumero(this.filaTmp.getElemento()))
+                if(ehNumero(this.filaExpPolonesa.getElemento()))
                 {
-                    this.pilhaTmp.empilhe(this.filaTmp.getElemento());
-                    this.filaTmp.desenfileire();
+                    this.pilhaTmp.empilhe(this.filaExpPolonesa.getElemento());
+                    this.filaExpPolonesa.desenfileire();
                 }
                 else
                 {
-                    op = (char)this.filaTmp.getElemento();
-                    this.filaTmp.desenfileire();
-                    num1 = (double)this.pilhaTmp.getElement();
+                    op = this.filaExpPolonesa.getElemento().charAt(0);//string[0] = char
+                    this.filaExpPolonesa.desenfileire();
+                    num1 = Double.parseDouble(this.filaExpPolonesa.getElemento());
                     this.pilhaTmp.desempilhe();
-                    num2 = (double)this.pilhaTmp.getElement();
+                    num2 = Double.parseDouble(this.filaExpPolonesa.getElemento());
                     this.pilhaTmp.desempilhe();
 
-                    this.pilhaTmp.empilhe(fazOperacao(num1,num2,op));
+                    this.pilhaTmp.empilhe(String.valueOf(calcular(num1,num2,op)));
                 }
             }
-            while(!(this.filaTmp.vazia())) ;
-            
+            while(!(this.filaExpPolonesa.vazia())) ;
         }
           
        protected boolean ehNumero(String s){
@@ -78,9 +78,9 @@ public class ResolvedorDeExpressao {
            }
             return false;
         }
-	protected double fazOperacao(double num1,double num2,  char op) throws Exception
+	protected double calcular(double num1,double num2,  char op) throws Exception
        {
-           double ret = 0;//ele ira ser inicializado de qualqer jeito mas nao sabe disso
+           double ret = 0;
            switch(op){
                
                 case'+': ret =num1 + num2;
@@ -115,6 +115,20 @@ public class ResolvedorDeExpressao {
 	
 	public String toString() {
 		
+		StringBuilder ret = new StringBuilder();
+		ret.append("Expressao original:\n");
+		ret.append(this.exp.toString() + "\n");
+		ret.append("Resultado:\n");
+		try {
+			if(!this.pilhaTmp.vazia()) {
+				ret.append(this.pilhaTmp.getElement());
+			}else {
+				ret.append("Ainda nao calculado.");
+			}
+		} catch (Exception e) {
+		}
+		
+		return ret.toString();
 	}
 	
 	public boolean equals(Object obj) {
