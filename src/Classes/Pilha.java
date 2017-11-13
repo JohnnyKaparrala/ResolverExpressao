@@ -93,7 +93,7 @@ public class Pilha <X> implements Cloneable
      * @return O ultimo elemento do vetor.
      * @throws Exception Sera lancada uma excecao se a pilha estiver vazia.
      */
-    public X getElement () throws Exception{
+    public X getElemento () throws Exception{
         if ( this.vazia())
                 throw new Exception("pilha vazia");
 
@@ -151,7 +151,7 @@ public class Pilha <X> implements Cloneable
     }
 
     /**
-     * Verifica se a instancia de Fila é igual a outro objeto.
+     * Verifica se a instancia de Fila ï¿½ igual a outro objeto.
      * @param obj O objeto a ser comparado.
      * @return true, se for igual. false, se for diferente.
      */

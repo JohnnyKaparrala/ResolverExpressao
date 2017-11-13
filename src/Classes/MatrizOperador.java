@@ -1,7 +1,7 @@
 package Classes;
 
 public class MatrizOperador {
-	public static final String lista = "(^*/+-)";
+	protected static final String lista = "(^*/+-)";
 	
 	protected static final boolean[][] matriz = { 
 			//(      ^     *     /     +     -     )	

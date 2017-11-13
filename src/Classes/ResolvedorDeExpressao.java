@@ -12,7 +12,8 @@ public class ResolvedorDeExpressao {
 	protected Fila<String>  filaExpPolonesa;
 	protected StringTokenizer quebrador;
 	protected String exp;
-
+       
+        
 	public ResolvedorDeExpressao(String expOriginal) throws Exception{
 		this.exp = expOriginal;
 		quebrador = new StringTokenizer(this.exp, MatrizOperador.lista, true);
@@ -25,19 +26,21 @@ public class ResolvedorDeExpressao {
 		this.resolverNotacaoPolonesa();
 	}
 	
-	protected void paraNotacaoPolonesa() throws Exception{
+	public String paraNotacaoPolonesa() throws Exception{
 		 while( quebrador.hasMoreTokens()) {
 			 String str = quebrador.nextToken();
 			 
 			 if( this.matriz.lista.contains(str)) {
-                                
-                             while(this.matriz.temPrioridade(this.pilhaTmp.getElemento(), str))
-                             {
-                                 this.filaExpPolonesa.enfileire(this.pilhaTmp.getElemento());
-                                 this.pilhaTmp.desempilhe();
-                             }
-				 pilhaTmp.empilhe(str);
-			 }else{
+                            if(!(this.pilhaTmp.vazia())) 
+                                do{
+                                    this.filaExpPolonesa.enfileire(this.pilhaTmp.getElemento());
+                                    this.pilhaTmp.desempilhe();
+                                }     
+                                while (!(this.pilhaTmp.vazia())&& this.matriz.temPrioridade(this.pilhaTmp.getElemento().charAt(0), str.charAt(0)));
+
+                            pilhaTmp.empilhe(str);
+			}
+                        else{
                             if( ehNumero(str)){
                                     filaExpPolonesa.enfileire(str);
                             }
@@ -47,6 +50,16 @@ public class ResolvedorDeExpressao {
                          }
 			
 		 }
+                 
+                 if(!(this.pilhaTmp.vazia())) 
+                 do{
+                     this.filaExpPolonesa.enfileire(this.pilhaTmp.getElemento());
+                     this.pilhaTmp.desempilhe();
+                 }
+                 while (!(this.pilhaTmp.vazia()));
+                    
+                 return this.filaExpPolonesa.toString();
+                 
 	}
 	
     protected void resolverNotacaoPolonesa() throws Exception{
@@ -54,8 +67,6 @@ public class ResolvedorDeExpressao {
             char op;   
             double num1;
             double num2;
-            pilhaTmp = new <String>Pilha();
-
             do
             {
                 if(ehNumero(this.filaExpPolonesa.getElemento()))
@@ -132,7 +143,7 @@ public class ResolvedorDeExpressao {
 		ret.append("Resultado:\n");
 		try {
 			if(!this.pilhaTmp.vazia()) {
-				ret.append(this.pilhaTmp.getElement());
+				ret.append(this.pilhaTmp.getElemento().charAt(0));
 			}else {
 				ret.append("Ainda nao calculado.");
 			}
