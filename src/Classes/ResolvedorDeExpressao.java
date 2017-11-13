@@ -31,7 +31,8 @@ public class ResolvedorDeExpressao {
 			 String str = quebrador.nextToken();
 			 
 			 if( this.matriz.lista.contains(str)) {
-                            if(!(this.pilhaTmp.vazia())) 
+                           
+                             if(!(this.pilhaTmp.vazia())&& this.matriz.temPrioridade(this.pilhaTmp.getElemento().charAt(0), str.charAt(0)))
                                 do{
                                     this.filaExpPolonesa.enfileire(this.pilhaTmp.getElemento());
                                     this.pilhaTmp.desempilhe();
