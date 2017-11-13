@@ -12,9 +12,8 @@ public class Main {
 	        String exp = new String(br.readLine());
 	        ResolvedorDeExpressao resolvedor = new ResolvedorDeExpressao(exp);
 	        
-	        
-	        
-                System.out.println( resolvedor.paraNotacaoPolonesa());
+	        resolvedor.resolver();
+                System.out.println( resolvedor.toString());
 		}
 		catch(Exception erro) {
 			erro.printStackTrace();
