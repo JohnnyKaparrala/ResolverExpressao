@@ -30,10 +30,21 @@ public class ResolvedorDeExpressao {
 			 String str = quebrador.nextToken();
 			 
 			 if( this.matriz.lista.contains(str)) {
-				 filaExpPolonesa.enfileire(str);
-			 }else{
+                                
+                             while(this.matriz.temPrioridade(this.pilhaTmp.getElemento(), str))
+                             {
+                                 this.filaExpPolonesa.enfileire(this.pilhaTmp.getElemento());
+                                 this.pilhaTmp.desempilhe();
+                             }
 				 pilhaTmp.empilhe(str);
-			 }
+			 }else{
+                            if( ehNumero(str)){
+                                    filaExpPolonesa.enfileire(str);
+                            }
+                            else{
+                                throw new Exception("Expressao invalida.");
+                            }
+                         }
 			
 		 }
 	}
@@ -105,7 +116,7 @@ public class ResolvedorDeExpressao {
             
             ret =  ret*7 + this.matriz.hashCode();
             ret =  ret*7 + this.pilhaTmp.hashCode();
-            ret =  ret*7 + this.filaTmp.hashCode();
+            ret =  ret*7 + this.filaExpPolonesa.hashCode();
             ret =  ret*7 + this.quebrador.hashCode();        
             ret =  ret*7 + this.exp.hashCode();
             
@@ -146,7 +157,7 @@ public class ResolvedorDeExpressao {
                 return false;
             if(!(this.pilhaTmp.equals(resolvE.pilhaTmp)))
                 return false;
-            if(!(this.filaTmp.equals(resolvE.filaTmp)))
+            if(!(this.filaExpPolonesa.equals(resolvE.filaExpPolonesa)))
                 return false;
             if(!(this.quebrador.equals(resolvE.quebrador)))
                 return false;

@@ -18,13 +18,13 @@ public class MatrizOperador {
 		//
 	}
 	
-	public boolean temPrioridade( char op1, char op2 ) throws Exception{
-		if( lista.indexOf(op1) == -1) 
-			throw new Exception("operador invalido: "+ op1);
-		if( lista.indexOf(op2) == -1) 
-			throw new Exception("operador invalido: "+ op2);
+	public boolean temPrioridade( char simbTopo, char simbSeq ) throws Exception{
+		if( lista.indexOf(simbTopo) == -1) 
+			throw new Exception("operador invalido: "+ simbTopo);
+		if( lista.indexOf(simbSeq) == -1) 
+			throw new Exception("operador invalido: "+ simbSeq);
 		
-		return matriz[lista.indexOf(op1)][lista.indexOf(op2)];
+		return matriz[lista.indexOf(simbTopo)][lista.indexOf(simbSeq)];
 	}
 	
 	public String toString() {
